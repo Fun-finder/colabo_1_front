@@ -9,14 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/vue-fontawesome": "^3.0.6",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "bootstrap-vue": "^2.23.1",
     "pinia": "^2.1.7",
+    "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-cli": "^2.9.6",
+    "vue-router": "^4.3.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.1.6"
-  }
+    "vite": "^5.2.7"
+  },
+  "description": "The first small team project's frontend",
+  "main": "vite.config.js",
+  "author": "",
+  "license": "ISC"
 }
