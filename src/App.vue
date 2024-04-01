@@ -49,7 +49,7 @@
         return this.$store.state.auth.user
       }
     },
-    methods {
+    methods :{
       logOut () {
         this.$store.dispatch('auth/logout');
         this.$router.push('/')

@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-    import UserService from '../services/user.service';
+    import UserService from '../services/user-service';
 
     export default {
         name : 'profile',
@@ -27,4 +27,4 @@
             )
         }
     }
-</script>
+</script>../services/user-service
