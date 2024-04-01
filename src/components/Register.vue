@@ -89,6 +89,11 @@
             }
         },
         mounted(){
+            if(this.loggedIn){
+                this.$router.push("/")
+            }
+        },
+        methods: {
             handleRegister(){
                 this.message = "";
                 this.submitted = true;
@@ -104,7 +109,7 @@
                                 this.successful = false;
                             }
                         ).then(
-                            this.$router.push("/");
+                            this.$router.push("/")
                         )
                     }
                 })
