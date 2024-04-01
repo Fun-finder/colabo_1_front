@@ -25,6 +25,7 @@ app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.use(router)
     .use(store)
+    .component("App", App)
     .mount("#app");
 
 //지울 것

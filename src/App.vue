@@ -1,47 +1,59 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div id="app">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <div class="navbar-brand">vue-login</div>
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/" class="nav-link">
+            <font-awesome-icon icon="home">Home</font-awesome-icon>
+          </a>
+        </li>
+      </div>
+      <div class="navbar-nav mr-auto" v-if="!currentUser">
+        <li class="nav-item">
+          <a href="/register" class="nav-link">
+            <font-awesome-icon icon="user-plus">Sign up</font-awesome-icon>
+          </a>
+        </li>
+      </div>
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/login" class="nav-link">
+            <font-awesome-icon icon="sign-in-alt">LogIn</font-awesome-icon>
+          </a>
+        </li>
+      </div>
+      <div class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a href="/profile" class="nav-link">
+            <font-awesome-icon icon="user">{{ currentUser.username }}</font-awesome-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" @click="logOut">
+            <font-awesome-icon icon="sign-out-alt">LogOut</font-awesome-icon>
+          </a>
+        </li>
+      </div>
+    </nav>
+    <div class="container">
+      <router-view/>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+<script>
+  export default {
+    computed: {
+      currentUser() {
+        return this.$store.state.auth.user
+      }
+    },
+    methods {
+      logOut () {
+        this.$store.dispatch('auth/logout');
+        this.$router.push('/')
+      }
+    }
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+</script>
