@@ -11,23 +11,23 @@
       </div>
       <div class="navbar-nav mr-auto" v-if="!currentUser">
         <li class="nav-item">
-          <a href="/register" class="nav-link">
+          <RouterLink to="/register" class="nav-link">
             <font-awesome-icon icon="user-plus">Sign up</font-awesome-icon>
-          </a>
+          </RouterLink>
         </li>
       </div>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="/login" class="nav-link">
+          <RouterLink to="/login" class="nav-link">
             <font-awesome-icon icon="sign-in-alt">LogIn</font-awesome-icon>
-          </a>
+          </RouterLink>
         </li>
       </div>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a href="/profile" class="nav-link">
+          <RouterLink to="/profile" class="nav-link">
             <font-awesome-icon icon="user">{{ currentUser.username }}</font-awesome-icon>
-          </a>
+          </RouterLink>
         </li>
         <li class="nav-item">
           <a class="nav-link" @click="logOut">

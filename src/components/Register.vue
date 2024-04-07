@@ -5,61 +5,51 @@
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             class="profile-img-card" 
         />
-        <form name="form" @sublit.prevent="handleRegister">
+        <Form name="form" @sublit.prevent="handleRegister" :validation-scheme="scheme">
             <div v-if="!successful">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input
-                        type="text"
+                    <Field
                         class="form-control"
                         name="username"
+                        placeholder="username"
                         v-mode="user.username"
-                        v-validate="'requred|min:3|max:20'"
                     />
-                    <div 
+                    <ErrorMessage 
                         class="alert-danger"
-                        v-if="submitted && error.has('username')"
-                    >
-                        {{ errirs.first('username') }}
-                    </div>
+                        name="email"
+                    />
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input
-                        type="email"
-                        class="form-control"
+                    <Field
                         name="email"
+                        class="form-control"
                         v-mode="user.username"
-                        v-validate="'requred|email|max:50'"
                     />
-                    <div 
+                    <ErrorMessage 
                         class="alert-danger"
-                        v-if="submitted && error.has('email')"
-                    >
-                        {{ errirs.first('email') }}
-                    </div>
+                        name="email"
+                    />
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input
+                    <Field
                         type="password"
                         class="form-control"
                         name="password"
                         v-mode="user.username"
-                        v-validate="'requred|min:6|max:40'"
                     />
-                    <div 
+                    <ErrorMessage 
                         class="alert-danger"
-                        v-if="submitted && error.has('password')"
-                    >
-                        {{ errirs.first('password') }}
-                    </div>
+                        name="password"
+                    />
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary btn-block">Sign Up</button>
                 </div>
             </div>
-        </form>
+        </Form>
         <div
             class="alert"
             :class="successful ? 'alert-success' : 'alert-danger'"
@@ -71,7 +61,23 @@
 </template>
 
 <script>
-    import User from '../models/user'
+    import User from '../models/User'
+    import { Field, Form, ErrorMessage } from 'vee-validate';
+    import * as yup from 'yup';
+
+    //validation scheme
+    const maxStringMsg = "최대 20자 이하로 입력해야합니다."
+    const usernameScheme = yup.string().min(6, "최소 6자 이상 입력해야 합니다.").max(20, maxStringMsg);
+    const passwordSchene = yup.string().max(20, maxStringMsg);
+    const emailScheme = yup.string()
+        .matches(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, '이메일 형식에 맞지 않습니다.')
+        .required('이메일을 입력해주세요.');
+
+    const formScheme = yup.object({
+        username : usernameScheme,
+        password : passwordSchene,
+        email : emailScheme
+    })
 
     export default {
         name : 'register',
@@ -93,26 +99,27 @@
                 this.$router.push("/")
             }
         },
+        computed : {
+            scheme(){
+                return formScheme;
+            }
+        },
         methods: {
             handleRegister(){
                 this.message = "";
                 this.submitted = true;
-                this.$validator.validate().then(valid => {
-                    if(valid){
-                        this.$store.dispatch('auth/register', this.user).then(
-                            data => {
-                                this.message = data.message;
-                                this.successful = true;
-                            },
-                            error => {
-                                this.message = error.message;
-                                this.successful = false;
-                            }
-                        ).then(
-                            this.$router.push("/")
-                        )
+                this.$store.dispatch('auth/register', this.user).then(
+                    data => {
+                        this.message = data.message;
+                        this.successful = true;
+                    },
+                    error => {
+                        this.message = error.message;
+                        this.successful = false;
                     }
-                })
+                ).then(
+                    this.$router.push("/")
+                )
             }
         }
     }
