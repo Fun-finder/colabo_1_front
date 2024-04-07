@@ -27,7 +27,7 @@
                     type="password"
                     class="form-control"
                     name="password"
-                    v-modle="user.password"
+                    v-model="user.password"
                     v-validate="'required'"
                 />
                 <div
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-    import User from '../models/user';
+    import User from '../models/User';
     
     export default {
         name: 'login',
@@ -65,7 +65,7 @@
                 loading : false,
                 message : ""
             }
-        }
+        },
         mounted () {
             if(this.loggedIn) {
                 this.$router.push("/");

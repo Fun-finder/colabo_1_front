@@ -1,9 +1,9 @@
-import Vue from 'vue';
+import {createApp} from 'vue';
 import Vuex from 'vuex';
 
 import {auth } from './auth.module'
 
-const app = Vue.createApp({})
+const app = createApp({})
 app.use(Vuex)
 
 export default new Vuex.Store({

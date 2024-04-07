@@ -29,5 +29,13 @@
   "description": "The first small team project's frontend",
   "main": "vite.config.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fun-finder/colabo_1_front.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fun-finder/colabo_1_front/issues"
+  },
+  "homepage": "https://github.com/Fun-finder/colabo_1_front#readme"
 }
