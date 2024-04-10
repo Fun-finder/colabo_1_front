@@ -50,7 +50,6 @@
 <script>
     import User from '../models/User';
     import { Field, Form, ErrorMessage } from 'vee-validate';
-import { stringifyQuery } from 'vue-router';
     import * as yup from 'yup';
 
     //validation

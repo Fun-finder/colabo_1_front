@@ -27,4 +27,4 @@
             )
         }
     }
-</script>../services/user-service
+</script>
