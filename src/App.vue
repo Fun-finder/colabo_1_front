@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <div class="navbar-brand">vue-login</div>
+    <nav class="navbar navbar-expand navbar-dark main-color-1 px-3">
+      <div class="navbar-brand">
+        <img src="/src/assets/just_logo.png" alt="logo image" class="logo">
+      </div>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <a href="/" class="nav-link">
@@ -62,3 +64,16 @@
     }
   }
 </script>
+
+<style>
+.main-color-1 {
+  background-color: #D6DAC8;
+}
+.main-bg {
+  background-color: #EFBC9B;
+}
+.logo {
+  height: 50px;
+  padding: 0 auto;
+}
+</style>

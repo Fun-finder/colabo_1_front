@@ -1,27 +1,34 @@
 <template>
     <div class="container">
         <div class="row content-height" >
-            <div class="d-none left-list col-xl-3">
+            <div class="left-list col-xl-3">
+                왼쪽
             </div>
-            <div class="col-xl-9 right-content">
-
+            <div class="col-xl-9 right-content row">
+                <Item v-for="item in itemList">
+                </Item>
             </div>
         </div>
     </div>
 </template>
 <script>
-    export default {
-        name: "Main",
-        data() {
-            return {
-                content: "",
-                itemList: []
-            }
-        },
-        mounted(){
+import Item from './Article.vue';
 
+export default {
+    name: "Main",
+    components : {
+        Item
+    },
+    data() {
+        return {
+            content: "",
+            itemList: [1,2,3,4,5]
         }
+    },
+    mounted(){
+
     }
+}
 </script>
 <style scoped>
 .left-list {

@@ -1,10 +1,9 @@
 <template>
     <div class="container mt-5 card">
         <div class="col-xl-8 mx-auto text-center p-4">
-            <div class="test-img mb-3 mx-auto">
-            </div>
-            <header class="card-header">
-                <h3>앱 이름</h3>
+            <img class="mb-3 mx-auto" src="/src/assets/logo_no_background.png"/>
+            <header class="title">
+                <h3>메모리 퍼즐</h3>
             </header>
             <p class="card-body">
                 {{ content }}
