@@ -34,11 +34,16 @@
             <font-awesome-icon icon="sign-out-alt">LogOut</font-awesome-icon>
           </a>
         </li>
+        <li class="nav-item">
+          <RouterLink to="/main" class="nav-link">
+            <font-awesome-icon icon="user">메인페이지</font-awesome-icon>
+          </RouterLink>
+        </li>
       </div>
     </nav>
-    <div class="container">
+    <main class="container">
       <router-view/>
-    </div>
+    </main>
   </div>
 </template>
 
