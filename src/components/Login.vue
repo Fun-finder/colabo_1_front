@@ -1,56 +1,59 @@
 <template>
-    <div class="col-md-12">
-        <img 
-            id="profile-img"
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            class="profile-img-card"
-        />
-        <Form name="form" @submit.prevent="handleLogin" :validation-scheme="scheme">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <Field
-                    type="text"
-                    class="form-control"
-                    name="username"
-                    v-model="user.username"
+    <div class="mx-auto mt-5 col-xl-8">
+        <div class="card">
+            <div class="card-body">
+                <img 
+                    id="profile-img"
+                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    class="profile-img-card"
                 />
-                <ErrorMessage
-                    class="alert alert-danger"
-                    role="alert"
-                    name="username"
-                />
+                <Form name="form" @submit.prevent="handleLogin" :validation-scheme="scheme">
+                    <div class="form-group">
+                        <label for="username">아이디</label>
+                        <Field
+                            type="text"
+                            class="form-control"
+                            name="username"
+                            v-model="user.username"
+                        />
+                        <ErrorMessage
+                            class="alert alert-danger"
+                            role="alert"
+                            name="username"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">비밀번호</label>
+                        <Field
+                            type="password"
+                            class="form-control"
+                            name="password"
+                            v-model="user.password"
+                        />
+                        <ErrorMessage
+                            class="alert alert-danger"
+                            role="alert"
+                            name="username"
+                        />
+                    </div>
+                    <div class="form-group py-3">
+                        <button class="btn btn-primary btn-block" :disabled="loading">
+                            <span class="spinner-border spinner-border-sm" v-show="loading"></span>
+                            <span>Login</span>
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" v-if="message">{{ message }}</div>
+                    </div>
+                </Form>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <Field
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    v-model="user.password"
-                />
-                <ErrorMessage
-                    class="alert alert-danger"
-                    role="alert"
-                    name="username"
-                />
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary btn-block" :disabled="loading">
-                    <span class="spinner-border spinner-border-sm" v-show="loading"></span>
-                    <span>Login</span>
-                </button>
-            </div>
-            <div class="form-group">
-                <div class="alert alert-danger" role="alert" v-if="message">{{ message }}</div>
-            </div>
-        </Form>
+        </div>
     </div>
 </template>
 
 <script>
     import User from '../models/User';
     import { Field, Form, ErrorMessage } from 'vee-validate';
-import { stringifyQuery } from 'vue-router';
     import * as yup from 'yup';
 
     //validation

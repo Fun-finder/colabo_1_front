@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <div class="navbar-brand">vue-login</div>
+    <nav class="navbar navbar-expand navbar-dark main-color-1 px-3">
+      <div class="navbar-brand">
+        <img src="/src/assets/just_logo.png" alt="logo image" class="logo">
+      </div>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <a href="/" class="nav-link">
@@ -34,11 +36,16 @@
             <font-awesome-icon icon="sign-out-alt">LogOut</font-awesome-icon>
           </a>
         </li>
+        <li class="nav-item">
+          <RouterLink to="/main" class="nav-link">
+            <font-awesome-icon icon="user">메인페이지</font-awesome-icon>
+          </RouterLink>
+        </li>
       </div>
     </nav>
-    <div class="container">
+    <main class="container">
       <router-view/>
-    </div>
+    </main>
   </div>
 </template>
 
@@ -57,3 +64,16 @@
     }
   }
 </script>
+
+<style>
+.main-color-1 {
+  background-color: #D6DAC8;
+}
+.main-bg {
+  background-color: #EFBC9B;
+}
+.logo {
+  height: 50px;
+  padding: 0 auto;
+}
+</style>
