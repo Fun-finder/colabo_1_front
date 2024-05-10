@@ -7,7 +7,9 @@
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     class="profile-img-card"
                 />
-                <Form name="form" @submit.prevent="handleLogin" :validation-scheme="scheme">
+                <!-- <Form name="form" @submit.prevent="handleLogin" :validation-scheme="scheme"> -->
+                <Form name="form" @submit="handleLogin" :validation-scheme="scheme">
+
                     <div class="form-group">
                         <label for="username">아이디</label>
                         <Field
@@ -52,7 +54,7 @@
 </template>
 
 <script>
-    import User from '../models/User';
+    import User from '../models/user.js';
     import { Field, Form, ErrorMessage } from 'vee-validate';
     import * as yup from 'yup';
 
@@ -98,26 +100,26 @@
                 return formScheme;
             }
         },
-        methods : {
-            handleLogin(){
-                this.loading = true;
-                
-                if(errorMessages == null || errorMessages.legnth == 0) {
-                    this.loading = false;
-                    return;
-                }
-
-                this.$store.dispatch('auth/login', this.user).then(
-                    ()=>{
-                        this.$router.push('profile');
-                    },
-                    error =>{
-                        this.loading = false;
-                        this.message = error.message
-                    }
-                )
+        methods: {
+            handleLogin() {
+                const user = {
+                    username: this.user.username,
+                    password: this.user.password
+                };
+                console.log("user:: ", user)
+                this.$store.dispatch('auth/login', user)
+                    .then(() => {
+                        // 로그인 성공 시 처리
+                        this.$router.push('/profile'); // 예시: 프로필 페이지로 이동
+                    })
+                    .catch(error => {
+                        // 로그인 실패 시 처리
+                        console.error('로그인 오류:', error);
+                        this.message = error; // 예시: 오류 메시지 표시
+                    });
             }
         }
+
     }
 </script>
 <style scoped>

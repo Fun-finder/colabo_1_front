@@ -7,8 +7,8 @@
     </div>
 </template>
 <script>
-    import UserService from '../services/user-service';
-
+    import AuthService from '../services/auth-service';
+    
     export default {
         name : 'profile',
         data(){
@@ -17,9 +17,9 @@
             }
         },
         mounted(){
-            UserService.getUserContent().then(
+            AuthService.getUserContent().then(
                 response => {
-                    this.content = response.data;
+                    this.content = response;
                 },
                 error => {
                     this.content = error.response.data.message;

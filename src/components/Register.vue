@@ -61,7 +61,7 @@
 </template>
 
 <script>
-    import User from '../models/User'
+    import User from '../models/user.js'
     import { Field, Form, ErrorMessage } from 'vee-validate';
     import * as yup from 'yup';
 

@@ -8,14 +8,16 @@ export const auth = {
     state : initialState,
     actions : {
         login({commit}, user){
+            console.log('user: ', user)
             return AuthService.login(user).then(
                 user=> {
                     commit('loginSuccess', user);
                     return Promise.resolve(user);
                 },
                 error => {
+                    console.log('loginFailure')
                     commit('loginFailure');
-                    return Promise.reject(error.response.data);
+                    return Promise.reject(error.response);
                 }
             )
         },
@@ -43,7 +45,7 @@ export const auth = {
         },
         loginFailure(state) {
             state.status = {}
-            status.user = null;
+            state.user = null;
         },
         logout(state){
             state.status = {};
