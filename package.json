@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.2.7"
+    "vite": "^5.2.11"
   },
   "description": "The first small team project's frontend",
   "main": "vite.config.js",
