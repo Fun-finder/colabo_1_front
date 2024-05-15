@@ -7,17 +7,18 @@ const API_URL = '/api/v1/user';
 class AuthService {
     async login(user) {
         try {
-            const response = await axios.post(API_URL + '/login', {
-                body: JSON.stringify(user)
-            } ,{headers: {
-                'Content-Type': 'application/json'
-              }}
-            // , { headers: await authHeader() }
-        ); // CSRF 토큰을 요청 헤더에 포함
+            console.log('auth:', user)
+            const response = await axios.post(API_URL + '/login', user, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+                // , { headers: await authHeader() }
+            ); // CSRF 토큰을 요청 헤더에 포함
             // console.log('response.data::', response.data)
             return response.data; // 반환된 데이터에 접근하여 사용자 정보를 반환
         } catch (error) {
-            throw error.response.data; 
+            throw error.response.data;
         }
     }
 
@@ -34,7 +35,7 @@ class AuthService {
             }, { headers: await authHeader() });
             return response.data;
         } catch (error) {
-            throw error.response.data; 
+            throw error.response.data;
         }
     }
 

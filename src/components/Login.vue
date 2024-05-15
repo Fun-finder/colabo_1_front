@@ -103,7 +103,7 @@
         methods: {
             handleLogin() {
                 const user = {
-                    username: this.user.username,
+                    loginId: this.user.username,
                     password: this.user.password
                 };
                 console.log("user:: ", user)
