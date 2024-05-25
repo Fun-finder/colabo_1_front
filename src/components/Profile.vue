@@ -1,11 +1,15 @@
 <template>
     <div class="container">
-        <header class="jumbotron">
-            <h3>user name : {{ content }}</h3>
-            <h3>password : {{ content }}</h3>
-        </header>
+      <div class="input-group">
+        <label for="loginId">ID:</label>
+        <input type="text" id="loginId" :value="content.loginId" disabled>
+      </div>
+      <div class="input-group">
+        <label for="password">PW:</label>
+        <input type="password" id="password" :value="content.password" disabled>
+      </div>
     </div>
-</template>
+  </template>
 <script>
     import AuthService from '../services/auth-service';
     
@@ -31,3 +35,22 @@
         }
     }
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.input-group {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+label {
+  margin-right: 10px;
+}
+</style>

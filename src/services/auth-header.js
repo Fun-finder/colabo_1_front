@@ -13,16 +13,20 @@ async function getCsrfToken() {
     }
 }
 
+async function getJwtToken() {
+    return localStorage.getItem('jwtToken');
+}
+
 export default async function authHeader() {
     try {
         const csrfToken = await getCsrfToken();
-        const jwtToken = localStorage.getItem('jwtToken');
+        const jwtToken = await getJwtToken();
         const headers = {
             'X-CSRF-TOKEN': csrfToken,
             'Content-Type': 'application/json'
         };
         if (jwtToken) {
-            headers['Authorization'] = jwtToken;
+            headers['Authorization'] = `Bearer ${jwtToken}`;
         }
         return headers;
     } catch (error) {

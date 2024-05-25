@@ -8,11 +8,9 @@ class AuthService {
         try {
             console.log('auth:', user);
             const response = await axios.post(API_URL + '/login', user, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: await authHeader() // 수정된 부분
             });
-            const token = response.headers.authorization;
+            const token = response.data.Token; // 수정된 부분
             if (token) {
                 localStorage.setItem('jwtToken', token);
                 console.log('Login successful and token stored');
@@ -27,7 +25,6 @@ class AuthService {
     }
 
     logout() {
-        // 로그아웃 로직
         localStorage.removeItem('jwtToken');
     }
 
@@ -46,8 +43,7 @@ class AuthService {
 
     async getProfile() {
         try {
-            const headers = await authHeader();
-            const response = await axios.get(API_URL + '/profile', { headers });
+            const response = await axios.get(API_URL + '/profile', { headers: await authHeader() }); // 수정된 부분
             console.log('response.data:', response.data);
             return response.data;
         } catch (error) {
