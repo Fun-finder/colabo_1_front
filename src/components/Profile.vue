@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <header class="jumbotron">
-            <h3>user name : {{ content.username }}</h3>
-            <h3>email : {{ content.emain }}</h3>
+            <h3>user name : {{ content }}</h3>
+            <h3>password : {{ content }}</h3>
         </header>
     </div>
 </template>
@@ -16,15 +16,18 @@
                 content: ''
             }
         },
-        mounted(){
-            AuthService.getUserContent().then(
-                response => {
-                    this.content = response;
-                },
-                error => {
-                    this.content = error.response.data.message;
-                }
-            )
+        mounted() {
+            this.fetchProfileData();
+         },
+         methods: {
+            async fetchProfileData() {
+            try {
+                const data = await AuthService.getProfile();
+                this.content = data;
+            } catch (error) {
+                this.error = error;
+            }
+            }
         }
     }
 </script>

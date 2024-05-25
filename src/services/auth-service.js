@@ -1,4 +1,3 @@
-// auth-service.js
 import axios from 'axios';
 import authHeader from './auth-header';
 
@@ -7,23 +6,29 @@ const API_URL = '/api/v1/user';
 class AuthService {
     async login(user) {
         try {
-            console.log('auth:', user)
+            console.log('auth:', user);
             const response = await axios.post(API_URL + '/login', user, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
+            });
+            const token = response.headers.authorization;
+            if (token) {
+                localStorage.setItem('jwtToken', token);
+                console.log('Login successful and token stored');
+            } else {
+                console.log('Token not found in response headers');
             }
-                // , { headers: await authHeader() }
-            ); // CSRF 토큰을 요청 헤더에 포함
-            // console.log('response.data::', response.data)
-            return response.data; // 반환된 데이터에 접근하여 사용자 정보를 반환
+            return response.data;
         } catch (error) {
+            console.log('service error:', error);
             throw error.response.data;
         }
     }
 
     logout() {
         // 로그아웃 로직
+        localStorage.removeItem('jwtToken');
     }
 
     async join(user) {
@@ -39,12 +44,15 @@ class AuthService {
         }
     }
 
-    async getUserContent() {
+    async getProfile() {
         try {
-            const response = await axios.post(API_URL + '/userContent', {}, { headers: await authHeader() });
+            const headers = await authHeader();
+            const response = await axios.get(API_URL + '/profile', { headers });
+            console.log('response.data:', response.data);
             return response.data;
         } catch (error) {
-            throw error.response.data;
+            console.error('Error fetching profile data:', error.response ? error.response.data : error.message);
+            throw error.response ? error.response.data : error.message;
         }
     }
 }
