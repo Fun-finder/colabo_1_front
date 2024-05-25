@@ -14,7 +14,11 @@
                         로그인
                     </RouterLink>
                 </div>
-                <div class="btn btn-primary ml-1">회원가입</div>
+                <div class="btn btn-primary ml-1">
+                    <RouterLink to="/register" class="nav-link">
+                        회원가입
+                    </RouterLink>
+                </div>
             </footer>
         </div>
     </div>

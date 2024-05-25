@@ -109,13 +109,11 @@
                 console.log("user:: ", user)
                 this.$store.dispatch('auth/login', user)
                     .then(() => {
-                        // 로그인 성공 시 처리
-                        this.$router.push('/profile'); // 예시: 프로필 페이지로 이동
+                        this.$router.push('/profile');
                     })
                     .catch(error => {
-                        // 로그인 실패 시 처리
                         console.error('로그인 오류:', error);
-                        this.message = error; // 예시: 오류 메시지 표시
+                        this.message = error; 
                     });
             }
         }
