@@ -33,10 +33,11 @@ class AuthService {
         return !!token;
     }
 
-    async join(user) {
+    async register(user) {
         try {
+            console.log('user:', user)
             const response = await axios.post(API_URL + '/join', {
-                loginId: user.loginId,
+                loginId: user.username,
                 password: user.password,
                 email: user.email
             }, { headers: await authHeader() });
@@ -48,8 +49,7 @@ class AuthService {
 
     async getProfile() {
         try {
-            const response = await axios.get(API_URL + '/profile', { headers: await authHeader() }); // 수정된 부분
-            console.log('response.data:', response.data);
+            const response = await axios.get(API_URL + '/profile', { headers: await authHeader() });
             return response.data;
         } catch (error) {
             console.error('Error fetching profile data:', error.response ? error.response.data : error.message);
