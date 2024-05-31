@@ -39,8 +39,11 @@ class AuthService {
             const response = await axios.post(API_URL + '/join', {
                 loginId: user.username,
                 password: user.password,
-                email: user.email
+                email: user.email,
+                nickname: user.nickname,
+                passwordChk: user.passwordChk
             }, { headers: await authHeader() });
+            console.log(response.data)
             return response.data;
         } catch (error) {
             throw error.response.data;

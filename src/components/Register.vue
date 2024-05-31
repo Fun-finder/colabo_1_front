@@ -7,17 +7,37 @@
                     <div class="form-group">
                         <label for="username">아이디</label>
                         <Field type="text" class="form-control" name="username" v-model="user.username" />
-                        <ErrorMessage class="alert-danger" name="username" />
+                        <ErrorMessage name="username" v-slot="{ message }">
+                            <div class="alert-danger">{{ message }}</div>
+                        </ErrorMessage>
                     </div>
                     <div class="form-group">
                         <label for="email">이메일</label>
                         <Field type="text" name="email" class="form-control" v-model="user.email" />
-                        <ErrorMessage class="alert-danger" name="email" />
+                        <ErrorMessage name="email" v-slot="{ message }">
+                            <div class="alert-danger">{{ message }}</div>
+                        </ErrorMessage>
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">닉네임</label>
+                        <Field type="text" name="nickname" class="form-control" v-model="user.nickname" />
+                        <ErrorMessage name="nickname" v-slot="{ message }">
+                            <div class="alert-danger">{{ message }}</div>
+                        </ErrorMessage>
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
                         <Field type="password" class="form-control" name="password" v-model="user.password" />
-                        <ErrorMessage class="alert-danger" name="password" />
+                        <ErrorMessage name="password" v-slot="{ message }">
+                            <div class="alert-danger">{{ message }}</div>
+                        </ErrorMessage>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordChk">비밀번호 확인</label>
+                        <Field type="password" class="form-control" name="passwordChk" v-model="user.passwordChk" />
+                        <ErrorMessage name="passwordChk" v-slot="{ message }">
+                            <div class="alert-danger">{{ message }}</div>
+                        </ErrorMessage>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-primary btn-block">등록</button>
@@ -43,11 +63,17 @@ const passwordScheme = yup.string().max(20, maxStringMsg);
 const emailScheme = yup.string()
     .matches(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, '이메일 형식에 맞지 않습니다.')
     .required('이메일을 입력해주세요.');
+const nicknameScheme = yup.string().required('닉네임을 입력해주세요.');
+const passwordChkScheme = yup.string()
+    .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
+    .required('비밀번호 확인을 입력해주세요.');
 
 const formScheme = yup.object({
     username: usernameScheme,
     password: passwordScheme,
-    email: emailScheme
+    email: emailScheme,
+    nickname: nicknameScheme,
+    passwordChk: passwordChkScheme,
 });
 
 export default {
@@ -57,7 +83,7 @@ export default {
     },
     data() {
         return {
-            user: new User("", "", ""),
+            user: new User("", "", "", "", ""),
             submitted: false,
             successful: false,
             message: ""
@@ -78,23 +104,29 @@ export default {
     },
     methods: {
         handleRegister() {
-            alert('눌름')
             this.message = "";
             this.submitted = true;
-            this.$store.dispatch('auth/register', this.user).then(
-                data => {
-                    this.message = data.message;
-                    this.successful = true;
-                },
-                error => {
-                    this.message = error.message;
-                    this.successful = false;
-                }
-            ).then(() => {
-                if (this.successful) {
-                    this.$router.push("/");
-                }
-            });
+            this.$store.dispatch('auth/register', this.user)
+                .then(
+                    response => {
+                        console.log('response', response)
+                        this.message = response.Message;
+                        this.successful = true;
+                    },
+                    error => {
+                        console.log('error1::', error.Error)
+                        this.message = error.Error;
+                        this.successful = false;
+                    }
+                ).then(() => {
+                    console.log('then')
+                    if (this.successful) {
+                        this.$router.push("/");
+                    }
+                }).catch(error => {
+                    console.error('로그인 오류:', error);
+                    this.message = error; 
+                });
         }
     }
 }
