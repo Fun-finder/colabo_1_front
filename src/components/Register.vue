@@ -2,45 +2,40 @@
     <div class="mx-auto mt-5 col-xl-8">
         <div class="card">
             <div class="card-body">
-                <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
+                <h2>회원가입</h2>
                 <Form name="form" @submit="handleRegister" :validation-schema="scheme">
                     <div class="form-group">
-                        <label for="username">아이디</label>
-                        <Field type="text" class="form-control" name="username" v-model="user.username" />
+                        <Field type="text" class="form-control" name="username" v-model="user.username" placeholder="아이디" />
+                    </div>
+                    <div class="form-group">
+                        <Field type="password" class="form-control" name="password" v-model="user.password" placeholder="비밀번호"/>
+                    </div>
+                    <div class="form-group">
+                        <Field type="password" class="form-control" name="passwordChk" v-model="user.passwordChk" placeholder="비밀번호 확인"/>
+                    </div>
                         <ErrorMessage name="username" v-slot="{ message }">
                             <div class="alert-danger">{{ message }}</div>
                         </ErrorMessage>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">이메일</label>
-                        <Field type="text" name="email" class="form-control" v-model="user.email" />
-                        <ErrorMessage name="email" v-slot="{ message }">
-                            <div class="alert-danger">{{ message }}</div>
-                        </ErrorMessage>
-                    </div>
-                    <div class="form-group">
-                        <label for="nickname">닉네임</label>
-                        <Field type="text" name="nickname" class="form-control" v-model="user.nickname" />
-                        <ErrorMessage name="nickname" v-slot="{ message }">
-                            <div class="alert-danger">{{ message }}</div>
-                        </ErrorMessage>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">비밀번호</label>
-                        <Field type="password" class="form-control" name="password" v-model="user.password" />
                         <ErrorMessage name="password" v-slot="{ message }">
                             <div class="alert-danger">{{ message }}</div>
                         </ErrorMessage>
-                    </div>
-                    <div class="form-group">
-                        <label for="passwordChk">비밀번호 확인</label>
-                        <Field type="password" class="form-control" name="passwordChk" v-model="user.passwordChk" />
                         <ErrorMessage name="passwordChk" v-slot="{ message }">
                             <div class="alert-danger">{{ message }}</div>
                         </ErrorMessage>
+                    <div class="form-group">
+                        <Field type="text" name="email" class="form-control" v-model="user.email" placeholder="[선택] 이메일"/>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-block">등록</button>
+                        <Field type="text" name="nickname" class="form-control" v-model="user.nickname" placeholder="닉네임"/>
+                    </div>
+                    <ErrorMessage name="email" v-slot="{ message }">
+                        <div class="alert-danger">{{ message }}</div>
+                    </ErrorMessage>
+                    <ErrorMessage name="nickname" v-slot="{ message }">
+                        <div class="alert-danger">{{ message }}</div>
+                    </ErrorMessage>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block">회원가입</button>
                     </div>
                     <div class="alert" :class="successful ? 'alert-success' : 'alert-danger'" v-if="message">
                         {{ message }}
@@ -57,16 +52,16 @@ import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 
 // validation scheme
-const maxStringMsg = "최대 20자 이하로 입력해야합니다.";
-const usernameScheme = yup.string().min(6, "최소 6자 이상 입력해야 합니다.").max(20, maxStringMsg);
+const maxStringMsg = "아이디: 최대 20자 이하로 입력해야합니다.";
+const usernameScheme = yup.string().min(6, "아이디: 최소 6자 이상 입력해야 합니다.").max(20, maxStringMsg);
 const passwordScheme = yup.string().max(20, maxStringMsg);
 const emailScheme = yup.string()
-    .matches(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, '이메일 형식에 맞지 않습니다.')
-    .required('이메일을 입력해주세요.');
-const nicknameScheme = yup.string().required('닉네임을 입력해주세요.');
+    .matches(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, '이메일: 형식에 맞지 않습니다.')
+    .required('이메일: 이메일을 입력해주세요.');
+const nicknameScheme = yup.string().required('닉네임: 필수정보입니다.');
 const passwordChkScheme = yup.string()
-    .oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.')
-    .required('비밀번호 확인을 입력해주세요.');
+    .oneOf([yup.ref('password'), null], '비밀번호: 비밀번호가 일치하지 않습니다.')
+    .required('비밀번호 확인: 비밀번호 확인을 입력해주세요.');
 
 const formScheme = yup.object({
     username: usernameScheme,
