@@ -1,15 +1,36 @@
 <template>
-    <div class="container">
-      <div class="input-group">
-        <label for="loginId">ID:</label>
-        <input type="text" id="loginId" :value="content.loginId" disabled>
+  <div class="mx-auto mt-5 col-xl-8">
+      <div class="card">
+          <div class="card-body">
+              <Form class="form" @submit="handleProfile" :validation-scheme="scheme">
+                  <div class="form-group">
+                    <table>
+                      <tr>
+                        <td>프로필사진</td>
+                        <td><button>사진변경</button><button>삭제</button></td>
+                      </tr>
+                      <tr>
+                        <td>닉네임</td>
+                        <td><input type="text" :value="content.nickname"></td>
+                      </tr>
+                      <tr>
+                        <td>아이디</td>
+                        <td><input type="text" :value="content.loginId"></td>
+                      </tr>
+                        <td>이메일</td>
+                        <td><input type="text" :value="content.email"></td>
+                      <tr>
+                        <td>비밀번호</td>
+                        <td><input type="text"><button>변경</button></td>
+                      </tr>
+                    </table>
+                    <button>저장</button>
+                  </div>
+              </Form>
+          </div>
       </div>
-      <div class="input-group">
-        <label for="password">PW:</label>
-        <input type="password" id="password" :value="content.password" disabled>
-      </div>
-    </div>
-  </template>
+  </div>
+</template>
 <script>
     import AuthService from '../services/auth-service';
     
