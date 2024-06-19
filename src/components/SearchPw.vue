@@ -2,11 +2,11 @@
     <div class="mx-auto mt-5 col-xl-8">
         <div class="card">
             <div class="card-body">
-                <h2>아이디 찾기</h2>
-                <p>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</p>
+                <h2>비밀번호 찾기</h2>
+                <p>비밀번호를 찾고자하는 아이디를 입력해주세요.</p>
                 <Form class="form" @submit="handleSearch" :validation-schema="scheme">
                     <div class="form-group">
-                        <span>이름</span>
+                        <span>아이디</span>
                         <Field
                             type="text"
                             class="form-control"
@@ -73,7 +73,7 @@ const formScheme = yup.object({
 });
 
 export default {
-    name: 'searchId',
+    name: 'searchPw',
     components: {
         Form, Field, ErrorMessage
     },
@@ -125,9 +125,9 @@ export default {
 
             console.log("email:: ", email);
             this.loading = true;
-            this.$store.dispatch('search/id', email)
+            this.$store.dispatch('search/pw', email)
                 .then(() => {
-                    this.$router.push('/showId');
+                    this.$router.push('/showPw');
                 })
                 .catch(error => {
                     console.error('인증 오류:', error);
