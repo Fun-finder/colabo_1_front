@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h2>아이디 찾기</h2>
                 <p>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</p>
-                <Form class="form" @submit="handleSearch" :validation-schema="scheme">
+                <Form class="form" @submit="handleSearch" :validation-scheme="scheme">
                     <div class="form-group">
                         <span>이름</span>
                         <Field

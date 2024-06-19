@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
                 <h2>회원가입</h2>
-                <Form name="form" @submit="handleRegister" :validation-schema="scheme">
+                <Form name="form" @submit="handleRegister" :validation-scheme="scheme">
                     <div class="form-group">
                         <Field type="text" class="form-control" name="username" v-model="user.username" placeholder="아이디" />
                     </div>

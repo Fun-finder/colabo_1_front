@@ -21,7 +21,7 @@
                         <td><input type="text" :value="content.email"></td>
                       <tr>
                         <td>비밀번호</td>
-                        <td><input type="text"><button>변경</button></td>
+                        <td><input type="text"><button type="button" @click="this.onPopup = true">변경</button></td>
                       </tr>
                     </table>
                     <button>저장</button>
@@ -29,17 +29,22 @@
               </Form>
           </div>
       </div>
+      <changePw v-if="this.onPopup" @offPopup="this.onPopup = false;"></changePw>
   </div>
 </template>
 <script>
     import AuthService from '../services/auth-service';
-    
+    import changePw from './changePw.vue'
     export default {
         name : 'profile',
         data(){
             return {
-                content: ''
+                content: '',
+                onPopup: false,
             }
+        },
+        components:{
+          changePw
         },
         mounted() {
             this.fetchProfileData();
