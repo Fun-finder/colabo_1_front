@@ -41,6 +41,17 @@ export default {
     },
     mounted(){
 
+    },
+    methods : {
+        getArticleList() {
+            //loginId
+            //pageNo
+            // const user = JSON.parse(localStorage.getItem('user'));
+            // let pageNo = 0;
+            // this.$store.dispatch('article/fetchArticles', user.username, pageNo)
+            
+        }
+
     }
 }
 </script>
